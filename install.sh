@@ -1,5 +1,17 @@
 #!/bin/zsh
 
+# Define o repositório e a branch
+REPO_URL="https://raw.githubusercontent.com/Taleshs/lando_install/main/install"
+FILES=("env" "lando.yml" "composer.json" "wp-config.php")
+
+# Baixa os arquivos necessários
+for file in "${FILES[@]}"; do
+    wget -q "$REPO_URL/$file" -O "$file"
+done
+
+# Continua com a instalação normalmente
+
+
 # Define DB_PREFIX, assuming "_wp" as default if no argument is provided
 DB_PREFIX="${1:-_wp}"
 
