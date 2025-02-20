@@ -9,8 +9,16 @@ for file in "${FILES[@]}"; do
     if [ ! -f "$file" ]; then
         echo "Baixando $file..."
         wget -q "$REPO_URL/$file" -O "$file"
+        
+        # Verifica se o arquivo foi baixado corretamente
+        if [ ! -s "$file" ]; then
+            echo "Erro: O arquivo $file não foi baixado corretamente!"
+            rm -f "$file"  # Remove o arquivo vazio
+            exit 1
+        fi
     fi
 done
+
 
 # Define DB_PREFIX, assuming "_wp" as default if no argument is provided
 DB_PREFIX="${1:-_wp}"

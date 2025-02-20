@@ -12,7 +12,7 @@ This document provides instructions to automatically set up a WordPress environm
 
 Run the installation script directly from the repository:
 ```sh
-wget -qO install.sh https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh && bash install.sh _wp
+ curl -s https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh | bash -s _wp
 ```
 
 Ensure that the project folder contains only `db/` and `db/db.sql` before running the script.
