@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Define o repositório e a branch correta
-REPO_URL="https://raw.githubusercontent.com/Taleshs/lando_install/main/install"
+REPO_URL="https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main"
 FILES=(".env" ".lando.yml" "composer.json" "wp-config.php")
 
 # Baixa os arquivos necessários
