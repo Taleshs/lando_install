@@ -1,0 +1,24 @@
+name: 
+recipe: wordpress
+config:
+  php: '8.3'
+  via: apache
+  composer_version: '2'
+  webroot: .
+  database: mysql
+
+services:
+  appserver:
+    type: php:8.3
+    via: apache
+    webroot: .
+    ssl: true
+   
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
