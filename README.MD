@@ -12,10 +12,15 @@ This document provides instructions to automatically set up a WordPress environm
 
 Run the installation script directly from the repository:
 ```sh
-curl -s https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh | bash -s _wp
+ curl -s https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh | bash -s _wp
 ```
 
 Ensure that the project folder contains only `db/` and `db/db.sql` before running the script.
+
+Run the installation script:
+```sh
+./install/install.sh _wp
+```
 
 If no `DB_PREFIX` is provided, the script will use `_wp` as the default.
 
@@ -44,7 +49,7 @@ Este documento contém instruções para configurar um ambiente WordPress utiliz
 
 Execute o script de instalação diretamente do repositório:
 ```sh
-curl -s https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh | bash -s _wp
+ curl -s https://raw.githubusercontent.com/Taleshs/lando_install/refs/heads/main/install.sh | bash -s _wp
 ```
 
 Certifique-se de que a pasta do projeto contém apenas `db/` e `db/db.sql` antes de rodar o script.
