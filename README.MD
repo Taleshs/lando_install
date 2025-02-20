@@ -11,17 +11,16 @@ Este documento contém instruções para configurar um ambiente WordPress utiliz
 
 ## Como usar
 
-Clone o repositório e entre na pasta do projeto:
+Execute o script de instalação diretamente do repositório:
 ```sh
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+bash <(wget -qO- https://raw.githubusercontent.com/Taleshs/lando_install/main/install/install.sh) _wp
 ```
 
 Certifique-se de que a pasta do projeto contém apenas `db/` e `db/db.sql` antes de rodar o script.
 
 Execute o script de instalação:
 ```sh
-./install/install.sh meu_prefixo_
+./install/install.sh _wp
 ```
 
 Se nenhum `DB_PREFIX` for fornecido, o script usará `_wp` como padrão.
@@ -50,17 +49,16 @@ This document provides instructions to automatically set up a WordPress environm
 
 ## How to Use
 
-Clone the repository and navigate into the project folder:
+Run the installation script directly from the repository:
 ```sh
-git clone https://github.com/your-user/your-repository.git
-cd your-repository
+bash <(wget -qO- https://raw.githubusercontent.com/Taleshs/lando_install/main/install/install.sh) _wp
 ```
 
 Ensure that the project folder contains only `db/` and `db/db.sql` before running the script.
 
 Run the installation script:
 ```sh
-./install/install.sh my_prefix_
+./install/install.sh _wp
 ```
 
 If no `DB_PREFIX` is provided, the script will use `_wp` as the default.
