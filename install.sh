@@ -19,65 +19,68 @@ for file in "${FILES[@]}"; do
     fi
 done
 
-
-# Define DB_PREFIX, assuming "_wp" as default if no argument is provided
+# Define DB_PREFIX, assumindo "_wp" como padrão caso não seja passado um argumento
 DB_PREFIX="${1:-_wp}"
 
-# Define the source directory (install folder)
+# Define o diretório de instalação
 INSTALL_DIR="$(dirname "$0")"
 
-# Define the destination directory as the current working directory
+# Define o diretório de destino como o diretório atual
 DEST_DIR="$(pwd)"
 
-# Get the project folder name (last part of the path)
+# Obtém o nome da pasta do projeto (última parte do caminho)
 PROJECT_NAME="$(basename "$DEST_DIR")"
 
 # Define URLs
 WP_HOME="https://${PROJECT_NAME}.lndo.site"
 WP_SITEURL="https://${PROJECT_NAME}.lndo.site"
 
-# Copy files
-cp "$INSTALL_DIR/.env" "$DEST_DIR"
-cp "$INSTALL_DIR/.lando.yml" "$DEST_DIR"
-cp "$INSTALL_DIR/composer.json" "$DEST_DIR"
-cp "$INSTALL_DIR/wp-config.php" "$DEST_DIR"
+# Copia os arquivos apenas se não existirem no destino
+for file in ".env" ".lando.yml" "composer.json" "wp-config.php"; do
+    if [ ! -f "$DEST_DIR/$file" ]; then
+        echo "Copiando $file..."
+        cp "$INSTALL_DIR/$file" "$DEST_DIR"
+    else
+        echo "Ignorando $file, já existe no destino."
+    fi
+done
 
-# Update .env file with new values
+# Atualiza o arquivo .env com os novos valores
 sed -i "s|DB_PREFIX =.*|DB_PREFIX = \"$DB_PREFIX\"|" "$DEST_DIR/.env"
 sed -i "s|WP_HOME =.*|WP_HOME = \"$WP_HOME\"|" "$DEST_DIR/.env"
 sed -i "s|WP_SITEURL =.*|WP_SITEURL = \"$WP_SITEURL\"|" "$DEST_DIR/.env"
 
-# Update the "name" field in .lando.yml
+# Atualiza o campo "name" no .lando.yml
 sed -i "1s|^name:.*|name: $PROJECT_NAME|" "$DEST_DIR/.lando.yml"
 
-echo "Files copied and updated:"
-echo "- .env updated with DB_PREFIX, WP_HOME, and WP_SITEURL"
-echo "- .lando.yml updated with name: $PROJECT_NAME"
+echo "Arquivos copiados e atualizados:"
+echo "- .env atualizado com DB_PREFIX, WP_HOME e WP_SITEURL"
+echo "- .lando.yml atualizado com name: $PROJECT_NAME"
 echo "- DB_PREFIX = $DB_PREFIX"
 echo "- WP_HOME = $WP_HOME"
 echo "- WP_SITEURL = $WP_SITEURL"
 
-# Start Lando environment
-echo "Starting Lando environment..."
+# Inicia o ambiente Lando
+echo "Iniciando o ambiente Lando..."
 lando start
 
-# Install Composer dependencies
-echo "Installing Composer dependencies..."
+# Instala as dependências do Composer
+echo "Instalando dependências do Composer..."
 lando composer install
 
-# Download WordPress core
-echo "Downloading WordPress..."
+# Baixa o WordPress
+echo "Baixando o WordPress..."
 lando wp core download --allow-root
 
-# Import database if the file exists
+# Importa o banco de dados, se existir
 DB_FILE="db/db.sql"
 
 if [ -f "$DB_FILE" ]; then
-    echo "Importing database..."
+    echo "Importando banco de dados..."
     lando db-import "$DB_FILE"
-    echo "Database imported successfully!"
+    echo "Banco de dados importado com sucesso!"
 else
-    echo "No db.sql file found in $DB_FILE, skipping database import."
+    echo "Nenhum arquivo db.sql encontrado em $DB_FILE, ignorando importação do banco."
 fi
 
-echo "Setup complete!"
+echo "Configuração concluída!"
