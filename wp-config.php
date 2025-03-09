@@ -95,6 +95,7 @@ define('WP_DEBUG_DISPLAY', true);
 define( 'WP_HOME', $_ENV['WP_HOME'] );
 define( 'WP_SITEURL', $_ENV['WP_SITEURL'] );
 
+define('WP_ENV',  $_ENV['WP_ENV'] );
 
 /* Adicione valores personalizados entre esta linha até "Isto é tudo". */
 // Aumenta o limite de memória

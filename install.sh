@@ -19,8 +19,8 @@ for file in "${FILES[@]}"; do
     fi
 done
 
-# Define DB_PREFIX, assumindo "_wp" como padrão caso não seja passado um argumento
-DB_PREFIX="${1:-_wp}"
+# Define DB_PREFIX, assumindo "wp_" como padrão caso não seja passado um argumento
+DB_PREFIX="${1:-wp_}"
 
 # Define o diretório de instalação
 INSTALL_DIR="$(dirname "$0")"
