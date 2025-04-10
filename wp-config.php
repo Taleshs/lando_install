@@ -88,9 +88,9 @@ $table_prefix = $_ENV['DB_PREFIX'];
  *
  * @link https://wordpress.org/documentation/article/debugging-in-wordpress/
  */
-define('WP_DEBUG', false );
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', true); 
+define('WP_DEBUG', $_ENV['WP_DEBUG'] );
+define('WP_DEBUG_LOG', $_ENV['WP_DEBUG_LOG']);
+define('WP_DEBUG_DISPLAY', $_ENV['WP_DEBUG_DISPLAY']); 
 
 define( 'WP_HOME', $_ENV['WP_HOME'] );
 define( 'WP_SITEURL', $_ENV['WP_SITEURL'] );
